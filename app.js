@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 8000;
 const DB = process.env.DB;
-
+app.use(express.json({ limit: "50mb" }));
 mongoose
   .connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -48,9 +48,9 @@ app.use("/user", LogOut);
 app.use("/user", MyProject);
 app.use("/user", SerchePublicProject);
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("clent/build"));
-}
+// if (process.env.NODE_ENV == "production") {
+//   app.use(express.static("clent/build"));
+// }
 
 app.listen(PORT, () => {
   console.log(`app listening on port ${PORT}`);

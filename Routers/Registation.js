@@ -5,11 +5,11 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const Rout = require("express").Router();
 const path = require("path");
+const fs = require("fs");
 
 // projectPhotos
 
 const storage = multer.diskStorage({
-
   destination: (req, file, cd) => {
     cd(null, "./public/Avatar");
   },
@@ -32,12 +32,22 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+function base64_encode(file) {
+  return "data:image/png;base64," + fs.readFileSync(file, "base64");
+}
+
 Rout.post("/register", upload.single("myfile"), async (req, res) => {
   try {
     const useInfo = req.body;
 
-    useInfo.Avatar = req.file.path;
+    // useInfo.Avatar = req.file.path;
+    useInfo.Avatar = base64_encode(`./${req.file.path}`);
 
+    fs.unlink(req.file.path, (error) => {
+      if (error) {
+        console.log(error);
+      }
+    });
     // console.log(useInfo);
 
     if (!useInfo.email || !useInfo.password) {
@@ -56,7 +66,6 @@ Rout.post("/register", upload.single("myfile"), async (req, res) => {
     // console.log(useInfo.Password);
 
     useInfo.password = await bcrypt.hash(useInfo.password, 6);
-    
 
     console.log(useInfo.password);
 

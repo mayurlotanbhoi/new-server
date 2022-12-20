@@ -13,7 +13,7 @@ Rout.post("/login", async (req, res, next) => {
     console.log(req.body);
 
     if (!email || !password) {
-      res.status(402).json({ massege: "please provide all info" });
+      res.status(401).json({ massege: "please provide all info" });
       return;
     }
 
