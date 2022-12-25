@@ -17,6 +17,8 @@ async function jwtVerify(req, res, next) {
 
     const user = jwt.verify(token, process.env.SECREATE_KEY);
 
+    console.log(user)
+
     if (!user.email) {
       res.status(401).json({ message: "Authentication failed" });
       return;
