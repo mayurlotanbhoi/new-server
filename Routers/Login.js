@@ -38,16 +38,16 @@ Rout.post("/login", async (req, res, next) => {
     });
 
     res
-      .setHeader(
-        "Set-Cookie",
-        cookie.serialize("jwtoken", jsonwebtoken, {
-          maxAge: 3600, // 1 hour in seconds
-          httpOnly: true,
-          // sameSite: "lax", // optional
-          // path: "/", // optional
-        })
-      )
-      .json({ massege: "Login SuccesFull" });
+    .status(200)
+    .cookie("jwtoken", jsonwebtoken, {
+      httpOnly: true,
+      expiresIn: "30d",
+      path: "/",
+      sameSite: true,
+    })
+    .json({ massege: "Login SuccesFull" });
+
+
     next();
   } catch (error) {
     console.log(error);
