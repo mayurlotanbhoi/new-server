@@ -37,13 +37,23 @@ Rout.post("/login", async (req, res, next) => {
       expiresIn: "30d",
     });
 
+    // res
+    // .status(200)
+    // .cookie("jwtoken", jsonwebtoken, {
+    //   httpOnly: true,
+    //   expiresIn: "30d",
+    //   path: "/",
+    //   sameSite: true,
+
+    // })
+
+
     res
     .status(200)
     .cookie("jwtoken", jsonwebtoken, {
+      secure: process.env.NODE_ENV !== "development",
       httpOnly: true,
-      expiresIn: "30d",
-      path: "/",
-      sameSite: true,
+      expires: dayjs().add(30, "days").toDate(),
     })
     .json({ massege: "Login SuccesFull" });
 
