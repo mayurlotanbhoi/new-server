@@ -54,4 +54,4 @@ const userDetails = mongoose.Schema({
   },
 });
 
-module.exports = new mongoose.model("userDetails", userDetails);
+module.exports = new mongoose.model("userdetails", userDetails);
