@@ -11,7 +11,7 @@ Rout.post("/login", async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
+    // console.log(req.body);
 
     if (!email || !password) {
       res.status(401).json({ massege: "please provide all info" });
