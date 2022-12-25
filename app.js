@@ -21,7 +21,7 @@ app.use(cookiParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://mern-project-gallery-app.onrender.com/","http://localhost:3000"],
     credentials: true,
   })
 );
