@@ -43,7 +43,7 @@ Rout.post("/login", async (req, res, next) => {
       httpOnly: true,
       expiresIn: "30d",
       SameSite: "None",
-      secure: process.env.NODE_ENV !== "development",
+      secure: true,
     }).json({ massege: "Login SuccesFull" });
 
 
