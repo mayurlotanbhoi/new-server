@@ -23,8 +23,8 @@ mongoose
 
 app.use(
   cors({
-    origin: ["https://mern-project-gallery-app.onrender.com","http://localhost:3000"],
-    credentials: true,
+    origin: "https://mern-project-gallery-app.onrender.com",
+    credentials: true, 
   })
 );
 
