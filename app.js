@@ -29,6 +29,7 @@ app.use(
   allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'], 
   credentials: true, 
   expiresIn: "30d", 
+  SameSite: "none",
   exposedHeaders: ['*', 'Authorization' ] 
   })
 );
