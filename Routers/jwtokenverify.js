@@ -11,7 +11,7 @@ async function jwtVerify(req, res, next) {
     // console.log(token);
 
     if (!token){
-    res.status(401).json({ message: "Authentication failed" });
+    res.status(401).json({ massege: "Authentication failed" });
      return
      } ;
 
@@ -20,7 +20,7 @@ async function jwtVerify(req, res, next) {
     console.log(user)
 
     if (!user.email) {
-      res.status(401).json({ message: "Authentication failed" });
+      res.status(401).json({ massege: "Authentication failed" });
       return;
     }
 
@@ -31,7 +31,7 @@ async function jwtVerify(req, res, next) {
     return;
   } catch (error) {
     console.log(error);
-    res.status(400).json({ masseg: "Authonticaton error" });
+    res.status(400).json({ massege: "Authonticaton error" });
 
     return;
   }
