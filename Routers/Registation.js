@@ -1,4 +1,3 @@
-const { json } = require("express");
 const userData = require("../modules/userScheama");
 const ProjectSchema = require("../modules/ProjectSheama");
 const multer = require("multer");
@@ -41,6 +40,8 @@ Rout.post("/register", upload.single("myfile"), async (req, res) => {
     const useInfo = req.body;
 
     // useInfo.Avatar = req.file.path;
+
+    // console.log("ok");
     useInfo.Avatar = base64_encode(`./${req.file.path}`);
 
     fs.unlink(req.file.path, (error) => {
@@ -62,19 +63,19 @@ Rout.post("/register", upload.single("myfile"), async (req, res) => {
       res.status(203).json({ massege: "User Alredy Present" });
       return;
     }
-
     // console.log(useInfo.Password);
-
     useInfo.password = await bcrypt.hash(useInfo.password, 6);
 
-    console.log(useInfo.password);
+    // console.log(useInfo.password);
 
     const data = await userData.create(useInfo);
+
     const project = await ProjectSchema.create({
       email: useInfo.email,
       Avatar: useInfo.Avatar,
     });
-    console.log(data);
+
+    // console.log(data);
 
     res.status(201).json({ massege: "Registation Succesful" });
   } catch (error) {

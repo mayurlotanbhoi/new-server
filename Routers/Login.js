@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const userdatas = require("../modules/userScheama");
 const Rout = require("express").Router();
+const cookie = require("cookie");
 // const TOKEN_VERIFY = require("./JWTverification");
 const jwt = require("jsonwebtoken");
 const bcypt = require("bcrypt");
@@ -37,13 +38,15 @@ Rout.post("/login", async (req, res, next) => {
     });
 
     res
-      .status(200)
-      .cookie("jwtoken", jsonwebtoken, {
-        httpOnly: true,
-        expiresIn: "30d",
-        path: "/",
-        sameSite: true,
-      })
+      .setHeader(
+        "Set-Cookie",
+        cookie.serialize("jwtoken", jsonwebtoken, {
+          maxAge: 3600, // 1 hour in seconds
+          httpOnly: true,
+          sameSite: "lax", // optional
+          path: "/", // optional
+        })
+      )
       .json({ massege: "Login SuccesFull" });
     next();
   } catch (error) {
