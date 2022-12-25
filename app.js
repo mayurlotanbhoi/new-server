@@ -41,7 +41,7 @@ const SerchePublicProject = require("./Routers/SechPublicProject");
 
 app.use("/user", GetPublicProject);
 app.use("/user", PublicProjectPost);
-app.use("/user", getuser);
+app.use(getuser);
 app.use("/user", Register);
 app.use("/user", Login);
 app.use("/user", AddProject);
