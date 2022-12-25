@@ -43,8 +43,8 @@ Rout.post("/login", async (req, res, next) => {
         cookie.serialize("jwtoken", jsonwebtoken, {
           maxAge: 3600, // 1 hour in seconds
           httpOnly: true,
-          sameSite: "lax", // optional
-          path: "/", // optional
+          // sameSite: "lax", // optional
+          // path: "/", // optional
         })
       )
       .json({ massege: "Login SuccesFull" });
