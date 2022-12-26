@@ -5,7 +5,7 @@ Rout.get("/logout", (req, res) => {
 
    res
     .status(200)
-    .cookie("jwtoken", jsonwebtoken, {
+    .cookie("jwtoken","nodata", {
       httpOnly: true,
       expiresIn: Date.now(),
       sameSite: "none",
