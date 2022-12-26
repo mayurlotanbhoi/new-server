@@ -13,7 +13,7 @@ Rout.get("/", jwtVerify, async (req, res) => {
 
     const { password, ...all } = userdata._doc;
 
-    console.log(all);
+    // console.log(all);
 
     res.status(200).json(all);
   } catch (error) {
