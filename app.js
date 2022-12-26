@@ -23,7 +23,7 @@ mongoose
 
 app.use(
   cors({
-    origin: ["https://mern-projectgallery-api.onrender.com/","https://mern-project-gallery-app.onrender.com","http://localhost:3000"],
+    origin: ["https://mern-projectgallery-api.onrender.com","https://mern-project-gallery-app.onrender.com","http://localhost:3000"],
     credentials: true,
     methods: ['GET', 'PUT', 'POST','DELETE'], 
   allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'], 
