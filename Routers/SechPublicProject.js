@@ -6,13 +6,13 @@ Rout.get("/serchProject/:email", async (req, res) => {
   try {
     const email = req.params.email;
 
-    console.log(email);
+    // console.log(email);
 
     const allProject = await PublicSchema.find({ email });
     const total = await PublicSchema.find({ email }).count();
 
-    console.log(allProject);
-    console.log(total);
+    // console.log(allProject);
+    // console.log(total);
 
     res.status(200).json({ allProject, total: total });
   } catch (error) {
