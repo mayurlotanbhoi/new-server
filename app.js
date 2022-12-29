@@ -30,7 +30,7 @@ app.use(
     methods: ["GET", "PUT", "POST", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
     credentials: true,
-    expires: Date.now() + 2592000000,
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     exposedHeaders: ["*", "Authorization"],
   })
 );

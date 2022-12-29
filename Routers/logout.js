@@ -1,18 +1,15 @@
 const Rout = require("express").Router();
 
 Rout.get("/logout", (req, res) => {
-
-
-   res
+  res
     .status(200)
-    .cookie("jwtoken","nodata", {
+    .cookie("jwtoken", "nodata", {
       httpOnly: true,
-      expiresIn: Date.now(),
+      expires: new Date(Date.now()),
       sameSite: "none",
       secure: true,
-    }).json({ massege: "logout" });
-
-  
+    })
+    .json({ massege: "logout" });
 });
 
 module.exports = Rout;
