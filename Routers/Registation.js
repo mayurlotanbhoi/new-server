@@ -31,39 +31,45 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-function base64_encode(file) {
-  return "data:image/png;base64," + fs.readFileSync(file, "base64");
-}
+// *************for incode filr in base64
+// function base64_encode(file) {
+//   return "data:image/png;base64," + fs.readFileSync(file, "base64");
+// }
 
 Rout.post("/register", upload.single("myfile"), async (req, res) => {
   try {
     const useInfo = req.body;
 
     // useInfo.Avatar = req.file.path;
-
     // console.log("ok");
-    useInfo.Avatar = base64_encode(`./${req.file.path}`);
+    // useInfo.Avatar = base64_encode(`./${req.file.path}`);
+    // console.log(useInfo);
+
+    if (!useInfo.email || !useInfo.password) {
+      res.send({ masseg: "please provide all information" });
+      return;
+    }
+
+    const UserAlreadyPresent = await userData.findOne({ email: useInfo.email });
+    if (UserAlreadyPresent) {
+      res.status(203).json({ massege: "User Alredy Present" });
+      return;
+    }
+
+    const conpressingImageBuf = await require("sharp")(req.file.path)
+      .resize(400)
+      .webp({ quality: 80 })
+      .toBuffer();
+    useInfo.Avatar = `data:image/png;base64,${conpressingImageBuf.toString(
+      "base64"
+    )}`;
 
     fs.unlink(req.file.path, (error) => {
       if (error) {
         console.log(error);
       }
     });
-    // console.log(useInfo);
 
-    if (!useInfo.email || !useInfo.password) {
-      res.send({ masseg: "please provide all information" });
-
-      return;
-    }
-
-    const UserAlreadyPresent = await userData.findOne({ email: useInfo.email });
-
-    if (UserAlreadyPresent) {
-      res.status(203).json({ massege: "User Alredy Present" });
-      return;
-    }
-    // console.log(useInfo.Password);
     useInfo.password = await bcrypt.hash(useInfo.password, 6);
 
     // console.log(useInfo.password);

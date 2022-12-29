@@ -18,9 +18,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-function base64_encode(file) {
-  return "data:image/png;base64," + fs.readFileSync(file, "base64");
-}
+// *******************conveting file base64
+// function base64_encode(file) {
+//   return "data:image/png;base64," + fs.readFileSync(file, "base64");
+// }
 
 Rout.post("/projectadd", upload.single("myfile"), async (req, res) => {
   try {
@@ -30,7 +31,18 @@ Rout.post("/projectadd", upload.single("myfile"), async (req, res) => {
 
     const projectItems = { ...projext };
 
-    projectItems.Photo = base64_encode(`./${req.file.path}`);
+    // projectItems.Photo = base64_encode(`./${req.file.path}`);
+
+    const convetImageBuf = await require("sharp")(req.file.path)
+      .resize(400)
+      .webp({ quality: 80 })
+      .toFile(compath, (err, info) => {})
+      .toBuffer();
+
+    projectItems.Photo = `data:image/png;base64,${convetImageBuf.toString(
+      "base64"
+    )}`;
+
     projectItems.accessibility = "PRIVET";
 
     fs.unlink(req.file.path, (error) => {

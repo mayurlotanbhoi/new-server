@@ -2,7 +2,7 @@ const Rout = require("express").Router();
 
 const PublicSchema = require("../modules/PublicProjectSchema");
 
-Rout.put("/public/Project/update/:id", async (req, res) => {
+Rout.patch("/public/Project/update/:id", async (req, res) => {
   try {
     const _id = req.params.id;
     const updateData = req.body;
