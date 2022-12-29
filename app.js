@@ -19,20 +19,21 @@ mongoose
     console.log(error);
   });
 
-
-
 app.use(
   cors({
-    origin: ["https://mern-projectgallery-api.onrender.com","https://mern-project-gallery-app.onrender.com","http://localhost:3000"],
+    origin: [
+      "https://mern-projectgallery-api.onrender.com",
+      "https://mern-project-gallery-app.onrender.com",
+      "http://localhost:3000",
+    ],
     credentials: true,
-    methods: ['GET', 'PUT', 'POST','DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'], 
-  credentials: true, 
-  expiresIn: "30d", 
-  exposedHeaders: ['*', 'Authorization' ] 
+    methods: ["GET", "PUT", "POST", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-csrf-token"],
+    credentials: true,
+    expiresIn: "30d",
+    exposedHeaders: ["*", "Authorization"],
   })
 );
-
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.json());
@@ -48,12 +49,12 @@ const MyProject = require("./Routers/Myproject");
 const PublicProjectPost = require("./Routers/PublicProject");
 const GetPublicProject = require("./Routers/GetPublicProject");
 const SerchePublicProject = require("./Routers/SechPublicProject");
-const DeletePublocProject = require("./Routers/DeletePublicProject")
-const updatepublicProject = require("./Routers/updatePublicProject")
+const DeletePublocProject = require("./Routers/DeletePublicProject");
+const updatepublicProject = require("./Routers/updatePublicProject");
 
 app.use("/user", GetPublicProject);
 app.use("/user", PublicProjectPost);
-app.use("/",getuser);
+app.use("/", getuser);
 app.use("/user", Register);
 app.use("/user", Login);
 app.use("/user", AddProject);

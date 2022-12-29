@@ -6,10 +6,7 @@ Rout.patch("/public/Project/update/:id", async (req, res) => {
   try {
     const _id = req.params.id;
     const updateData = req.body;
-
-    // console.log(_id;
     console.log(updateData);
-
     const allProject = await PublicSchema.findByIdAndUpdate(
       { _id },
       { ...updateData },
@@ -27,12 +24,6 @@ Rout.patch("/public/Project/update/:id", async (req, res) => {
       .catch(function (err) {
         console.log(err);
       });
-
-    //     const total = await PublicSchema.countDocuments();
-
-    // allProject = [...allProject].reverse();
-
-    // console.log(typeof allProject);
   } catch (error) {
     console.log(error);
   }
