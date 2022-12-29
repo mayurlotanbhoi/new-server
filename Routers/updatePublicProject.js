@@ -9,7 +9,7 @@ Rout.patch("/public/Project/update/:id", async (req, res) => {
     console.log(updateData);
     const allProject = await PublicSchema.findByIdAndUpdate(
       { _id },
-      { ...updateData },
+      { $set: req.body },
       function (err, docs) {
         if (err) {
           console.log(err);
