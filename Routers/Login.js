@@ -38,14 +38,14 @@ Rout.post("/login", async (req, res, next) => {
     });
 
     res
-    .status(200)
-    .cookie("jwtoken", jsonwebtoken, {
-      httpOnly: true,
-      expiresIn: "30d",
-      sameSite: "none",
-      secure: true,
-    }).json({ massege: "Login SuccesFull" });
-
+      .status(200)
+      .cookie("jwtoken", jsonwebtoken, {
+        httpOnly: true,
+        expires: Date.now() + 2592000000,
+        sameSite: "none",
+        secure: true,
+      })
+      .json({ massege: "Login SuccesFull" });
 
     // res
     // .status(200)
@@ -55,7 +55,6 @@ Rout.post("/login", async (req, res, next) => {
     //   expires: dayjs().add(30, "days").toDate(),
     // })
     // .json({ massege: "Login SuccesFull" });
-
 
     next();
   } catch (error) {
