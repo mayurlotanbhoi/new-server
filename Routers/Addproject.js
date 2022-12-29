@@ -36,7 +36,6 @@ Rout.post("/projectadd", upload.single("myfile"), async (req, res) => {
     const convetImageBuf = await require("sharp")(req.file.path)
       .resize(400)
       .webp({ quality: 80 })
-      .toFile(compath, (err, info) => {})
       .toBuffer();
 
     projectItems.Photo = `data:image/png;base64,${convetImageBuf.toString(
