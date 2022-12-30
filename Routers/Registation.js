@@ -9,10 +9,10 @@ const fs = require("fs");
 // projectPhotos
 
 const storage = multer.diskStorage({
-  destination: (req, file, cd) => {
-    cd(null, "./public/Avatar");
+  destination: (req, file, cb) => {
+    cb(null, "./public/Avatar");
   },
-  filename: (req, file, cd) => {
+  filename: (req, file, cb) => {
     let uniqueFileName =
       file.originalname + Date.now() + path.extname(file.originalname);
 
@@ -21,9 +21,10 @@ const storage = multer.diskStorage({
       file.mimetype == "image/jpg" ||
       file.mimetype == "image/jpeg"
     ) {
-      cd(null, uniqueFileName);
+      cb(null, uniqueFileName);
     } else {
       cb(null, false);
+
       return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
     }
   },
