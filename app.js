@@ -51,6 +51,7 @@ const GetPublicProject = require("./Routers/GetPublicProject");
 const SerchePublicProject = require("./Routers/SechPublicProject");
 const DeletePublocProject = require("./Routers/DeletePublicProject");
 const updatepublicProject = require("./Routers/updatePublicProject");
+const UpdateUserProfile = require("./Routers/updateuserdata");
 
 app.use("/user", GetPublicProject);
 app.use("/user", PublicProjectPost);
@@ -63,6 +64,7 @@ app.use("/user", MyProject);
 app.use("/user", SerchePublicProject);
 app.use("/user", DeletePublocProject);
 app.use("/user", updatepublicProject);
+app.use("/user", UpdateUserProfile);
 
 // if (process.env.NODE_ENV == "production") {
 //   app.use(express.static("clent/build"));
