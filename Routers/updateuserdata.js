@@ -84,7 +84,7 @@ Rout.put("/updateProfile", upload.single("myfile"), async (req, res) => {
 
     // console.log(data);
 
-    res.status(201).json({ massege: "Profile Update sucess Full" });
+    res.status(202).json({ massege: "Profile Update sucess Full" });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
