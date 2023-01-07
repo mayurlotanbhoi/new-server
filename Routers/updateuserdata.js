@@ -71,14 +71,17 @@ Rout.put("/updateProfile", upload.single("myfile"), async (req, res) => {
 
     //     const data = await userData.create(useInfo);
 
-    const project = await ProjectSchema.updateMany(
+    const project = await ProjectSchema.updateOne(
       { email: email },
       { $set: { ...useInfo } },
       options
     );
+
+    const { Stack, ...all } = useInfo;
+
     const public = await PublicSchema.updateMany(
       { email: email },
-      { $set: { ...useInfo } },
+      { $set: { ...all } },
       options
     );
 
